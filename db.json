@@ -1,0 +1,142 @@
+{
+  "recipes": [
+    {
+      "id": 0,
+      "name": "Spaghetti Bolognese",
+      "preperation_time": "15 Min",
+      "total_time": "30 Min",
+      "photo": "https://img.chefkoch-cdn.de/rezepte/923511197717113/bilder/1518873/crop-240x300/hirschgulasch.jpg",
+      "persons": 4,
+      "ingredients": [
+        {
+          "ingredient": "spaghetti",
+          "amount": "500g"
+        },
+        {
+          "ingredient": "tomaten",
+          "amount": "400g"
+        }
+      ],
+      "steps": [
+        "Schritt 1",
+        "Schritt 2"
+      ],
+      "created": "23.01.2024"
+    },
+    {
+      "id": 1,
+      "name": "Spaghetti Bolognese",
+      "preperation_time": "15 Min",
+      "total_time": "30 Min",
+      "photo": "https://img.chefkoch-cdn.de/rezepte/923511197717113/bilder/1518873/crop-240x300/hirschgulasch.jpg",
+      "persons": 4,
+      "ingredients": [
+        {
+          "ingredient": "spaghetti",
+          "amount": "500g"
+        },
+        {
+          "ingredient": "tomaten",
+          "amount": "400g"
+        }
+      ],
+      "steps": [
+        "Schritt 1",
+        "Schritt 2"
+      ],
+      "created": "23.01.2024"
+    },
+    {
+      "id": 2,
+      "name": "Spaghetti Bolognese",
+      "preperation_time": "15 Min",
+      "total_time": "30 Min",
+      "photo": "https://img.chefkoch-cdn.de/rezepte/923511197717113/bilder/1518873/crop-240x300/hirschgulasch.jpg",
+      "persons": 4,
+      "ingredients": [
+        {
+          "ingredient": "spaghetti",
+          "amount": "500g"
+        },
+        {
+          "ingredient": "tomaten",
+          "amount": "400g"
+        }
+      ],
+      "steps": [
+        "Schritt 1",
+        "Schritt 2"
+      ],
+      "created": "23.01.2024"
+    },
+    {
+      "id": 3,
+      "name": "Spaghetti Bolognese",
+      "preperation_time": "15 Min",
+      "total_time": "30 Min",
+      "photo": "https://img.chefkoch-cdn.de/rezepte/923511197717113/bilder/1518873/crop-240x300/hirschgulasch.jpg",
+      "persons": 4,
+      "ingredients": [
+        {
+          "ingredient": "spaghetti",
+          "amount": "500g"
+        },
+        {
+          "ingredient": "tomaten",
+          "amount": "400g"
+        }
+      ],
+      "steps": [
+        "Schritt 1",
+        "Schritt 2"
+      ],
+      "created": "23.01.2024"
+    },
+    {
+      "id": 4,
+      "name": "Spaghetti Bolognese",
+      "preperation_time": "15 Min",
+      "total_time": "30 Min",
+      "photo": "https://img.chefkoch-cdn.de/rezepte/923511197717113/bilder/1518873/crop-240x300/hirschgulasch.jpg",
+      "persons": 4,
+      "ingredients": [
+        {
+          "ingredient": "spaghetti",
+          "amount": "500g"
+        },
+        {
+          "ingredient": "tomaten",
+          "amount": "400g"
+        }
+      ],
+      "steps": [
+        "Schritt 1",
+        "Schritt 2"
+      ],
+      "created": "23.01.2024"
+    },
+    {
+      "id": 5,
+      "name": "Spaghetti Bolognese",
+      "preperation_time": "15 Min",
+      "total_time": "30 Min",
+      "photo": "https://img.chefkoch-cdn.de/rezepte/923511197717113/bilder/1518873/crop-240x300/hirschgulasch.jpg",
+      "persons": 4,
+      "ingredients": [
+        {
+          "ingredient": "spaghetti",
+          "amount": "500g"
+        },
+        {
+          "ingredient": "tomaten",
+          "amount": "400g"
+        }
+      ],
+      "steps": [
+        "Schritt 1",
+        "Schritt 2"
+      ],
+      "created": "23.01.2024"
+    }
+  ]
+}

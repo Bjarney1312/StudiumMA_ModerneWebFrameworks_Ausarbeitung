@@ -1,0 +1,8 @@
+.title-link{
+    text-decoration: none;
+    color: white;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+}

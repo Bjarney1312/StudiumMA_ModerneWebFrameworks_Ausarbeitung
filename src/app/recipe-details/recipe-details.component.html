@@ -1,0 +1,16 @@
+<article>
+    <img class="listing-photo" [src]="recipe?.photo"
+         alt="Exterior photo of {{recipe?.name}}"/>
+    <section class="listing-description">
+        <h2 class="listing-heading">{{recipe?.name}}</h2>
+        <p class="listing-location">{{recipe?.persons}}, {{recipe?.preperation_time}}</p>
+    </section>
+    <section class="listing-features">
+        <h2 class="section-heading">Zubereitung:</h2>
+        <ul>
+            <li>li1: {{recipe?.total_time}}</li>
+            <li>li2: {{recipe?.persons}}</li>
+            <li>li3: {{recipe?.persons}}</li>
+        </ul>
+    </section>
+</article>

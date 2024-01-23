@@ -1,0 +1,17 @@
+<section class="head-area">
+    <h2>Meine Rezepte</h2>
+    <form>
+        <input type="text" placeholder="Filter by name" #filter>
+            <button mat-mini-fab color="accent" (click)="filterResults(filter.value)">
+                <mat-icon>search</mat-icon>
+            </button>
+    </form>
+</section>
+<div class="result-container">
+    <section class="results">
+        <app-recipes *ngFor="let recipe of filteredRecipeList" [recipe]="recipe"></app-recipes>
+    </section>
+
+</div>
+
+

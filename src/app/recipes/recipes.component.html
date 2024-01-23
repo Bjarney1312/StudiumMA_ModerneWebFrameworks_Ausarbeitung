@@ -1,0 +1,10 @@
+<a [routerLink]="['/details', recipe.id]" class="recipe-link">
+    <section class="listing">
+        <img class="listing-photo" [src]="recipe.photo" alt="Exterior photo of {{recipe.name}}">
+        <h2 class="listing-heading">{{ recipe.name }}</h2>
+        <p class="listing-info">
+            <mat-icon color="accent">alarm</mat-icon>
+            {{ recipe.total_time}}
+            <mat-icon color="accent">person</mat-icon>
+            {{recipe.persons}}</p>
+</section> </a>
