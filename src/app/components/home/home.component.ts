@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RecipesComponent } from '../recipes/recipes.component';
-import { RecipeService } from "../recipe.service";
+import { RecipeService } from "../../services/recipe.service";
 import {NgForOf} from "@angular/common";
-import {Recipe} from "../recipe";
+import {Recipe} from "../../data/recipe";
 import {MatIcon} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 

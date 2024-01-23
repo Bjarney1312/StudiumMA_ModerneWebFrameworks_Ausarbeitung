@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../recipe';
+import { Recipe } from '../../data/recipe';
 import { RouterLink} from "@angular/router";
 import { RouterOutlet} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RecipeDetailsComponent } from '../../../../MWF-Ausarbeitung-Kneissig/src/app/recipe-details/recipe-details.component';
+import { RecipeDetailsComponent } from '../../../../../MWF-Ausarbeitung-Kneissig/src/app/recipe-details/recipe-details.component';
 
 describe('RecipeDetailsComponent', () => {
   let component: RecipeDetailsComponent;

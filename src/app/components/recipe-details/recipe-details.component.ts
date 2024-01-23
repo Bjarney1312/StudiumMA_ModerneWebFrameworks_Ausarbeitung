@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { RecipeService} from '../recipe.service';
-import { Recipe } from '../recipe';
+import { RecipeService} from '../../services/recipe.service';
+import { Recipe } from '../../data/recipe';
 @Component({
   selector: 'app-recipe-details',
   standalone: true,
