@@ -1,9 +1,10 @@
 <article class="recipe-details">
   <div class="recipe-head">
+    <h1 class="listing-heading">{{recipe?.name}}</h1>
     <img class="listing-photo" [src]="recipe?.photo"
          alt="Exterior photo of {{recipe?.name}}"/>
     <section class="listing-description">
-      <h1 class="listing-heading">{{recipe?.name}}</h1>
+
       <mat-chip class="chip">
         <mat-icon color="accent">person</mat-icon>
         {{recipe?.persons}}
@@ -22,16 +23,11 @@
 
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
 
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-
-        <!-- Position Column -->
         <ng-container matColumnDef="Menge">
           <th mat-header-cell *matHeaderCellDef> Menge</th>
           <td mat-cell *matCellDef="let element "> {{element.amount}} </td>
         </ng-container>
 
-        <!-- Name Column -->
         <ng-container matColumnDef="Zutat">
           <th mat-header-cell *matHeaderCellDef> Zutat</th>
           <td mat-cell *matCellDef="let element"> {{element.ingredient}} </td>
