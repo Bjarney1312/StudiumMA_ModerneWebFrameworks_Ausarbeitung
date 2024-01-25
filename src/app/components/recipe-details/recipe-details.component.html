@@ -1,16 +1,55 @@
-<article>
+<article class="recipe-details">
+  <div class="recipe-head">
     <img class="listing-photo" [src]="recipe?.photo"
          alt="Exterior photo of {{recipe?.name}}"/>
     <section class="listing-description">
-        <h2 class="listing-heading">{{recipe?.name}}</h2>
-        <p class="listing-location">{{recipe?.persons}}, {{recipe?.preperation_time}}</p>
+      <h1 class="listing-heading">{{recipe?.name}}</h1>
+      <mat-chip class="chip">
+        <mat-icon color="accent">person</mat-icon>
+        {{recipe?.persons}}
+      </mat-chip>
+      <mat-chip class="chip">
+        <mat-icon color="accent">alarm</mat-icon>
+        Vorbereitungszeit ca. {{recipe?.preperation_time}}
+      </mat-chip>
+      <mat-chip class="chip">
+        <mat-icon color="accent">alarm</mat-icon>
+        Gesamtzeit ca. {{recipe?.total_time}}
+      </mat-chip>
+
+      <h2>Zutaten:</h2>
+
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="Menge">
+          <th mat-header-cell *matHeaderCellDef> Menge</th>
+          <td mat-cell *matCellDef="let element "> {{element.amount}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Zutat">
+          <th mat-header-cell *matHeaderCellDef> Zutat</th>
+          <td mat-cell *matCellDef="let element"> {{element.ingredient}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </section>
-    <section class="listing-features">
-        <h2 class="section-heading">Zubereitung:</h2>
-        <ul>
-            <li>li1: {{recipe?.total_time}}</li>
-            <li>li2: {{recipe?.persons}}</li>
-            <li>li3: {{recipe?.persons}}</li>
-        </ul>
-    </section>
+
+  </div>
+
+  <section class="listing-features">
+    <h2>Zubereitung:</h2>
+
+      <p class= "recipe-steps" *ngFor="let step of recipe?.steps">
+        {{step}}
+      </p>
+
+  </section>
 </article>
