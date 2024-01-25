@@ -1,4 +1,5 @@
 export interface Ingredient {
   ingredient: string;
-  amount: string;
+  amount: number;
+  unit: string;
 }

@@ -21,6 +21,7 @@
 
 
 .chip{
+  margin-left: 10px;
   margin-right: 10px;
   margin-top: 10px;
 }
@@ -34,4 +35,19 @@
 
 h2{
   margin-top: 20px;
+}
+
+.info-area{
+  display: grid;
+  grid-template-areas: "c f";
+  grid-template-columns: 50% 50%;
+}
+
+.chip-area{
+  grid-area: c;
+}
+
+.add-favorite{
+  grid-area: f;
+  justify-self: end;
 }
