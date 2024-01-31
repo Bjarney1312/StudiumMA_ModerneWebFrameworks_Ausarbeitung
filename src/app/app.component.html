@@ -3,7 +3,7 @@
         <mat-toolbar color="primary">
             <a routerLink="/" class="title-link"><span>MCR - My Cooking Recipes</span></a>
             <span class="toolbar-spacer"></span>
-          <button mat-raised-button class="button-add-recipe" color="accent">
+          <button mat-raised-button class="button-add-recipe" color="accent" (click)="openAddRecipeDialogue()">
             <mat-icon>add</mat-icon>  Rezept hinzufügen
           </button>
           <button mat-raised-button class="button-favorites" color="accent" aria-label="Heart icon">

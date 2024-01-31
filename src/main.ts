@@ -8,6 +8,7 @@ import {provideHttpClient} from "@angular/common/http";
 import {importProvidersFrom} from "@angular/core";
 import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {InMemoryDataService} from "./app/services/in-memory-data.service";
+import {MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
 
 bootstrapApplication(AppComponent, {
     providers: [
@@ -16,8 +17,10 @@ bootstrapApplication(AppComponent, {
     provideAnimations(),
     provideHttpClient(),
     importProvidersFrom([
-        HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
+        HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService),
+      MatFormFieldModule
     ]),
+
 ]
 })
   .catch((err) => console.error(err));

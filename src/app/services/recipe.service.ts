@@ -78,20 +78,4 @@ export class RecipeService {
       return of(result as T);
     };
   }
-
-
-
-  // async getAllRecipes(): Promise<Recipe[]> {
-  //   const data = await fetch(this.url);
-  //   return await data.json() ?? [];
-  // }
-  //
-  // async getRecipeById(id: number): Promise<Recipe | undefined> {
-  //   const data = await fetch(`${this.url}/${id}`);
-  //   return await data.json() ?? {};
-  // }
-  //
-  // async addRecipe(recipe: Recipe){
-  //
-  // }
 }

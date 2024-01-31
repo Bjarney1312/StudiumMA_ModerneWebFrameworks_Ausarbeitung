@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Recipe } from "../data/recipe";
-import { Ingredient} from "../data/ingredient";
-import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +12,7 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     let recipes: Recipe [] = [
       {
-        "id": 0,
+        "id": "0",
         "name": "Spaghetti Bolognese",
         "preperation_time": "15 Min",
         "total_time": "30 Min",
