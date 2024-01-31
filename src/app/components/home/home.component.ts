@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { RecipesComponent } from '../recipes/recipes.component';
 import { RecipeService } from "../../services/recipe.service";
 import {NgForOf} from "@angular/common";
@@ -14,16 +14,26 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './home.component.css'
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   recipeList: Recipe[] = []
   recipeService: RecipeService = inject(RecipeService);
   filteredRecipeList: Recipe[] = []
 
-  constructor() {
-    this.recipeService.getAllRecipes().then((recipeList: Recipe[]) => {
-      this.recipeList = recipeList;
-      this.filteredRecipeList = recipeList;
-    });
+
+  ngOnInit(): void {
+    this.getRecipes()
+  }
+
+  /*---------------------------------------------------------------------------------------------------
+                                           Funktionen
+  -----------------------------------------------------------------------------------------------------*/
+
+  getRecipes(): void {
+    this.recipeService.getRecipes()
+      .subscribe(recipes => {
+        this.recipeList = recipes;
+        this.filteredRecipeList = recipes;
+      });
   }
 
   filterResults(text: string) {
