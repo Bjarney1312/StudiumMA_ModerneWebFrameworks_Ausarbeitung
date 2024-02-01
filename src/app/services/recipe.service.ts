@@ -8,9 +8,6 @@ import {catchError, Observable, of} from "rxjs";
 })
 export class RecipeService {
 
-  readonly baseUrl = 'https://angular.io/assets/images/tutorials/faa';
-  url = 'http://localhost:3000/recipes';
-
   constructor(private http: HttpClient) { }
 
   private recipeURL = 'api/recipes';
