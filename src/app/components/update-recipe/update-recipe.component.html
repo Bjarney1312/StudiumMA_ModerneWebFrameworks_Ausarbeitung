@@ -9,7 +9,7 @@
             <table>
                 <tr>
                     <td>
-                        <mat-form-field appearance="fill" class="add-recipe-input">
+                        <mat-form-field appearance="fill" class="recipe-table-input">
                             <mat-label>Bild-URL</mat-label>
                             <input matInput id="image" type="text" formControlName="image_url" value="{{recipe.photo}}">
                         </mat-form-field>
@@ -18,13 +18,13 @@
 
                 <tr>
                     <td>
-                        <mat-form-field appearance="fill" class="add-recipe-input">
+                        <mat-form-field appearance="fill" class="recipe-table-input">
                             <mat-label>Name</mat-label>
                             <input matInput id="name" type="text" formControlName="name" value="{{recipe.name}}">
                         </mat-form-field>
                     </td>
                     <td>
-                        <mat-form-field appearance="fill" class="add-recipe-input">
+                        <mat-form-field appearance="fill" class="recipe-table-input">
                             <mat-label>Personen</mat-label>
                             <input matInput id="persons" type="number" formControlName="persons" min="0" value="{{recipe.persons}}">
                         </mat-form-field>
@@ -33,7 +33,7 @@
 
                 <tr>
                     <td>
-                        <mat-form-field appearance="fill" class="add-recipe-input">
+                        <mat-form-field appearance="fill" class="recipe-table-input">
                             <mat-label>Vorbereitungszeit</mat-label>
                             <input matInput id="preperation-time" type="number" formControlName="preperation_time"
                                    min="0" value="{{prep_time}}">
@@ -47,7 +47,7 @@
                         </mat-form-field>
                     </td>
                     <td>
-                        <mat-form-field appearance="fill" class="add-recipe-input">
+                        <mat-form-field appearance="fill" class="recipe-table-input">
                             <mat-label>Gesamtdauer</mat-label>
                             <input matInput id="total-time" type="number" formControlName="total_time" min="0" value="{{total_time}}">
                         </mat-form-field>
@@ -75,13 +75,13 @@
             <table>
                 <tr>
                     <td>
-                        <mat-form-field appearance="fill" class="add-recipe-input">
+                        <mat-form-field appearance="fill" class="recipe-table-input">
                             <mat-label>Zutat</mat-label>
                             <input matInput id="ingredient" type="text" formControlName="ingredient">
                         </mat-form-field>
                     </td>
                     <td>
-                        <mat-form-field appearance="fill" class="add-recipe-input">
+                        <mat-form-field appearance="fill" class="recipe-table-input">
                             <mat-label>Menge</mat-label>
                             <input matInput id="amount" type="number" formControlName="amount">
                         </mat-form-field>
@@ -150,7 +150,7 @@
             <table>
                 <tr>
                     <td>
-                        <mat-form-field appearance="fill" class="add-recipe-input">
+                        <mat-form-field appearance="fill" class="recipe-table-input">
                             <mat-label>Zubereitungsschritt</mat-label>
                             <textarea matInput id="step" type="text" formControlName="step">
 

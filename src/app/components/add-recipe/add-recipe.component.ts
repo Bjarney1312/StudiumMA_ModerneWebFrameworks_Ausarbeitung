@@ -60,7 +60,7 @@ export class AddRecipeComponent implements OnInit {
     dataSource_ingredients: Ingredient[] = [];
     recipes: Recipe[] = [];
 
-    displayedColumns: string[] = ['Menge', 'Zutat', 'Entfernen'];
+    displayedColumns: string[] = ['Zutat', 'Menge', 'Entfernen'];
 
     recipe_information = this.formBuilder.group({
         name: '',
