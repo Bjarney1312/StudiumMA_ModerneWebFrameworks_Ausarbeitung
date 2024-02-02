@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Rezept erstellen</h2>
+
+<mat-dialog-content class="mat-typography">
+
+  <form class="add-recipe-form">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill" class="add-reptile-dialog-input">
+            <mat-label>Name</mat-label>
+            <input matInput name="name" id="recipe-name" [(ngModel)]="data.name"  required>
+          </mat-form-field>
+        </td>
+
+      </tr>
+
+
+    </table>
+
+  </form>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close (click)="onNoClick()">Abbrechen</button>
+    <button mat-button [mat-dialog-close]="data"
+            color="accent"
+            id="button-add">Hinzufügen
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>

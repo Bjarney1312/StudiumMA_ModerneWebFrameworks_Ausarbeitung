@@ -41,15 +41,16 @@ export class RecipeDetailsComponent implements OnInit {
     this.loadRecipe();
   }
 
-  async loadRecipe() {
-    const recipeId = parseInt(this.route.snapshot.params['id'], 10);
-    this.recipe = await this.recipeService.getRecipeById(recipeId);
-    // this.dataSource = this.recipe?.ingredients ? this.recipe?.ingredients : []
-    this.ingredients = this.recipe?.ingredients ? this.recipe?.ingredients : [];
-    this.dataSource = this.ingredients ? this.ingredients : []
+  loadRecipe(): void {
+    const id = String(this.route.snapshot.paramMap.get('id'));
+    this.recipeService.getRecipe(id)
+      .subscribe(recipe => {
+        this.recipe = recipe;
+        this.ingredients = recipe.ingredients;
+        this.dataSource = recipe.ingredients;
+        this.persons = recipe.persons;
+      });
 
-    this.persons = this.recipe?.persons;
-    this.ingredients = this.recipe?.ingredients;
   }
 
   addPerson() {
