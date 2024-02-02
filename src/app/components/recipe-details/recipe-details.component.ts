@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {RecipeService} from '../../services/recipe.service';
 import {Recipe} from '../../data/recipe';
 import {MatChipsModule} from '@angular/material/chips';
@@ -19,7 +19,8 @@ import {Favorites} from "../../data/favorites";
     MatIcon,
     NgForOf,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterLink
   ],
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.css'

@@ -63,7 +63,7 @@ export class FavoritesComponent implements OnInit {
             this.favoriteList = this.recipeList.filter(
                 x => this.favorites.favorite_recipe_ids
                     .map(y => y).includes(x.id));
-            
+
             this.filteredFavoritesList = this.favoriteList;
         })
     }

@@ -15,8 +15,8 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         "id": "0",
         "name": "Spaghetti Bolognese",
-        "preperation_time": "15 Min",
-        "total_time": "30 Min",
+        "preperation_time": "15 Minuten",
+        "total_time": "30 Minuten",
         "photo": "https://img.chefkoch-cdn.de/rezepte/923511197717113/bilder/1518873/crop-240x300/hirschgulasch.jpg",
         "persons": 4,
         "ingredients": [

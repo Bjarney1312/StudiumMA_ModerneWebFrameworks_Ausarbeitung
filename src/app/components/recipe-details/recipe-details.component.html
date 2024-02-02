@@ -1,5 +1,10 @@
 <article class="recipe-details">
   <div class="recipe-head">
+
+    <button mat-raised-button class="button-favorites" color="accent" aria-label="Heart icon" [routerLink]="['/update_recipe', recipe?.id]">
+      <mat-icon>favorite</mat-icon> Bearbeiten
+    </button>
+
     <h1 class="listing-heading">{{recipe?.name}}</h1>
     <img class="listing-photo" [src]="recipe?.photo"
          alt="Exterior photo of {{recipe?.name}}"/>

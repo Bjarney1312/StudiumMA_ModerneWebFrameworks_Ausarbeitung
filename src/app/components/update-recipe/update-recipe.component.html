@@ -1,0 +1,193 @@
+<h2>Rezept erstellen</h2>
+<mat-stepper [linear]="isLinear" #stepper>
+
+    <mat-step [stepControl]="recipe_information">
+
+        <form class="add-recipe-form" [formGroup]="recipe_information">
+            <ng-template matStepLabel>Rezeptinformationen</ng-template>
+
+            <table>
+                <tr>
+                    <td>
+                        <mat-form-field appearance="fill" class="add-recipe-input">
+                            <mat-label>Bild-URL</mat-label>
+                            <input matInput id="image" type="text" formControlName="image_url" value="{{recipe.photo}}">
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <mat-form-field appearance="fill" class="add-recipe-input">
+                            <mat-label>Name</mat-label>
+                            <input matInput id="name" type="text" formControlName="name" value="{{recipe.name}}">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="fill" class="add-recipe-input">
+                            <mat-label>Personen</mat-label>
+                            <input matInput id="persons" type="number" formControlName="persons" min="0" value="{{recipe.persons}}">
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <mat-form-field appearance="fill" class="add-recipe-input">
+                            <mat-label>Vorbereitungszeit</mat-label>
+                            <input matInput id="preperation-time" type="number" formControlName="preperation_time"
+                                   min="0" value="{{prep_time}}">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Einheit</mat-label>
+                            <select matNativeControl required formControlName="preperation_time_unit" value="{{prep_unit}}">
+                                <option value="Minuten">Minuten</option>
+                                <option value="Stunden">Stunden</option>
+                            </select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="fill" class="add-recipe-input">
+                            <mat-label>Gesamtdauer</mat-label>
+                            <input matInput id="total-time" type="number" formControlName="total_time" min="0" value="{{total_time}}">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Einheit</mat-label>
+                            <select matNativeControl required formControlName="total_time_unit" value="{{total_unit}}">
+                                <option value="Minuten">Minuten</option>
+                                <option value="Stunden">Stunden</option>
+                            </select>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+
+            <button mat-button matStepperNext (click)="updateRecipeInformation()">Next</button>
+        </form>
+
+    </mat-step>
+
+    <mat-step [stepControl]="recipe_ingredients">
+        <ng-template matStepLabel>Zutaten</ng-template>
+
+        <form class="add-recipe-form" [formGroup]="recipe_ingredients">
+
+            <table>
+                <tr>
+                    <td>
+                        <mat-form-field appearance="fill" class="add-recipe-input">
+                            <mat-label>Zutat</mat-label>
+                            <input matInput id="ingredient" type="text" formControlName="ingredient">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field appearance="fill" class="add-recipe-input">
+                            <mat-label>Menge</mat-label>
+                            <input matInput id="amount" type="number" formControlName="amount">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <mat-label>Einheit</mat-label>
+                            <select matNativeControl required formControlName="unit">
+                                <option value="g">g</option>
+                                <option value="kg">kl</option>
+                                <option value="ml">ml</option>
+                                <option value="l">l</option>
+                                <option value="TL">TL</option>
+                                <option value="EL">EL</option>
+                                <option value="Stk.">Stk.</option>
+                            </select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <button mat-raised-button class="button-add-ingredient" color="accent"
+                                aria-label="Add ingredient" (click)="addIngredient()">
+                            +
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+            <table #ingredientTable mat-table [dataSource]="dataSource_ingredients" class="mat-elevation-z8 table">
+
+                <ng-container matColumnDef="Menge">
+                    <th mat-header-cell *matHeaderCellDef>Menge</th>
+                    <td mat-cell *matCellDef="let element "> {{element.amount}} {{element.unit}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="Zutat">
+                    <th mat-header-cell *matHeaderCellDef> Zutat</th>
+                    <td mat-cell *matCellDef="let element"> {{element.ingredient}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Entfernen">
+                    <th mat-header-cell *matHeaderCellDef> Zutat</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-raised-button class="button-add-ingredient" color="accent"
+                                aria-label="Delete ingredient" (click)="removeIngredient(element)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </form>
+
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+
+    </mat-step>
+
+
+    <mat-step [stepControl]="recipe_steps">
+        <ng-template matStepLabel>Zubereitung</ng-template>
+
+        <form class="add-recipe-form" [formGroup]="recipe_steps" (ngSubmit)="onSubmit()">
+
+            <table>
+                <tr>
+                    <td>
+                        <mat-form-field appearance="fill" class="add-recipe-input">
+                            <mat-label>Zubereitungsschritt</mat-label>
+                            <textarea matInput id="step" type="text" formControlName="step">
+
+                            </textarea>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <button mat-raised-button class="button-add-step" color="accent"
+                                aria-label="Add step" (click)="addStep()" type="button">
+                            +
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+
+            <section class="listing-features">
+                <h2>Zubereitung:</h2>
+
+                <p class="recipe-steps" *ngFor="let step of recipe?.steps, index as i">
+                    {{step}}
+                    <button mat-raised-button class="button-add-step" color="accent"
+                            aria-label="Add step" (click)="removeStep(i)" type="button">
+                        Schritt löschen
+                    </button>
+                </p>
+
+            </section>
+
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-raised-button class="button-submit" color="accent" aria-label="Heart icon" type="submit">
+                <mat-icon>favorite</mat-icon>
+                Speichern
+            </button>
+        </form>
+
+
+    </mat-step>
+
+</mat-stepper>
