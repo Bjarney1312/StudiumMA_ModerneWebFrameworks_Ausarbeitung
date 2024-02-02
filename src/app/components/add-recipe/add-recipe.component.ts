@@ -9,7 +9,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from '@angular/material/select';
 import {Ingredient} from "../../data/ingredient";
-import {MatStepperModule} from '@angular/material/stepper';
+import {MatStepper, MatStepperModule} from '@angular/material/stepper';
 import {MatTable, MatTableModule} from '@angular/material/table';
 import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef} from "@angular/material/table";
 import {NgForOf} from "@angular/common";
@@ -45,6 +45,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 export class AddRecipeComponent implements OnInit {
   @ViewChild('ingredientTable') ingredientTable!: MatTable<Ingredient>;
+  @ViewChild('stepper') stepper!: MatStepper;
 
   recipe: Recipe = {} as Recipe;
   isLinear = true;
@@ -91,20 +92,25 @@ export class AddRecipeComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.saveRecipe(this.recipe)
-    this.updateStorage()
-    this.router.navigate(['/']);
+    if(this.recipe.ingredients.length === 0){
+      this.stepper.previous();
+    }
+    else{
+      this.saveRecipe(this.recipe)
+      this.updateStorage()
+      this.router.navigate(['/']);
+    }
   }
 
   saveRecipe(recipe: Recipe) {
     if (!recipe) {
       return;
     }
-    this.recipeService.addRecipe(recipe as Recipe)
-      .subscribe(recipe => {
-        this.recipes.push(recipe);
-        localStorage.setItem('recipes', JSON.stringify(this.recipes));
-      });
+      this.recipeService.addRecipe(recipe as Recipe)
+        .subscribe(recipe => {
+          this.recipes.push(recipe);
+          localStorage.setItem('recipes', JSON.stringify(this.recipes));
+        });
   }
 
   updateStorage() {
