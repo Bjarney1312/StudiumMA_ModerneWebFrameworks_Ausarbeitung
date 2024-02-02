@@ -1,28 +1,63 @@
 .listing {
-    background: lavender;
-    border-radius: 30px;
-    padding-bottom: 30px;
+  background: lavender;
+  border-radius: 30px;
+  padding-bottom: 30px;
+  height: 385px;
+  width: 250px;
 }
 
-.listing:hover{
-    border-style: dashed;
-    border-color: black;
+.listing-container {
+  border-style: solid;
+  border-color: transparent;
+  border-radius: 30px;
+  width: 251px;
+}
+
+.listing-container:hover {
+  border-style: dashed;
+  border-color: black;
 }
 
 .listing-heading {
-    color: black;
-    padding: 10px 20px 0 20px;
-}
-.listing-photo {
-    height: 250px;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 30px 30px 0 0;
-}
-.listing-info {
-    padding: 0 20px 0 20px;
+  color: black;
+  padding: 10px 20px 0 20px;
+  grid-area: a;
+  height: 80px;
 }
 
-.recipe-link{
-    text-decoration: none;
+.listing-photo {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 30px 30px 0 0;
+}
+
+.listing-info {
+  padding: 0 20px 0 20px;
+  grid-area: b;
+  display: flex;
+}
+
+.recipe-information {
+  display: grid;
+  grid-template-areas:
+    "a"
+    "b";
+}
+
+.recipe-link {
+  text-decoration: none;
+}
+
+.photo-container {
+  height: 250px;
+  width: 250px;
+  border-radius: 30px 30px 0 0;
+  background: #3f51b5;;
+}
+
+.text {
+  margin-top: 3px;
+  margin-right: 10px;
+  margin-left: 5px;
 }

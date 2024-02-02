@@ -15,10 +15,10 @@ import {MatButtonModule} from '@angular/material/button';
 })
 
 export class HomeComponent implements OnInit {
-  recipeList: Recipe[] = []
-  recipeService: RecipeService = inject(RecipeService);
-  filteredRecipeList: Recipe[] = []
 
+  recipeService: RecipeService = inject(RecipeService);
+  recipeList: Recipe[] = []
+  filteredRecipeList: Recipe[] = []
 
   ngOnInit(): void {
     this.getRecipes()
@@ -46,4 +46,5 @@ export class HomeComponent implements OnInit {
         recipe => recipe?.name.toLowerCase().includes(text.toLowerCase())
     );
   }
+
 }

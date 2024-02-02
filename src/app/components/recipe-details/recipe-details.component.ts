@@ -12,7 +12,7 @@ import {UserService} from "../../services/user.service";
 import {Favorites} from "../../data/favorites";
 import {MatDialog} from "@angular/material/dialog";
 import {Location} from '@angular/common';
-import {DialogueDeleteRecipeComponent} from "../../dialogue-delete-recipe/dialogue-delete-recipe.component";
+import {DialogueDeleteRecipeComponent} from "../dialogue-delete-recipe/dialogue-delete-recipe.component";
 
 @Component({
   selector: 'app-recipe-details',

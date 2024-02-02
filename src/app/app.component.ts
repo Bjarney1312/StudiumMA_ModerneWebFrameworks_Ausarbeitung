@@ -7,7 +7,6 @@ import {MatToolbar} from "@angular/material/toolbar";
 import {MatIconButton} from "@angular/material/button";
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {DialogueAddRecipeComponent} from "./components/dialogue-add-recipe/dialogue-add-recipe.component";
 import {Recipe} from "./data/recipe";
 import {RecipeService} from "./services/recipe.service";
 import { HttpClientModule } from '@angular/common/http';
