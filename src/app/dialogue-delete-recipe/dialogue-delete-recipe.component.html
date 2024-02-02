@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Tier entfernen</h2>
+
+<mat-dialog-content class="mat-typography">
+  <h3 id="delete-warn-title">Achtung!</h3>
+  <p id="delete-warn-text">Möchtest du dieses Rezept wirklich entfernen? Die Aktion kann
+    <span id="delete-warn-mark">nicht</span> rückgängig gemacht werden.
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close (click)="onNoClick()">Abbrechen</button>
+  <button mat-button [mat-dialog-close]="data" color="red">Entfernen</button>
+</mat-dialog-actions>

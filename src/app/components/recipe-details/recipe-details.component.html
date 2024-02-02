@@ -4,6 +4,10 @@
     <button mat-raised-button class="button-favorites" color="accent" aria-label="Heart icon" [routerLink]="['/update_recipe', recipe?.id]">
       <mat-icon>favorite</mat-icon> Bearbeiten
     </button>
+    <button mat-raised-button class="button-favorites" color="accent" aria-label="Heart icon" (click)="deleteRecipe()">
+      <mat-icon>favorite</mat-icon> Löschen
+    </button>
+
 
     <h1 class="listing-heading">{{recipe?.name}}</h1>
     <img class="listing-photo" [src]="recipe?.photo"

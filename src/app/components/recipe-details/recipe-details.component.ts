@@ -10,6 +10,9 @@ import {Ingredient} from "../../data/ingredient";
 import {MatButtonModule} from '@angular/material/button';
 import {UserService} from "../../services/user.service";
 import {Favorites} from "../../data/favorites";
+import {MatDialog} from "@angular/material/dialog";
+import {Location} from '@angular/common';
+import {DialogueDeleteRecipeComponent} from "../../dialogue-delete-recipe/dialogue-delete-recipe.component";
 
 @Component({
   selector: 'app-recipe-details',
@@ -38,7 +41,8 @@ export class RecipeDetailsComponent implements OnInit {
 
   displayedColumns: string[] = ['Menge', 'Zutat'];
 
-  constructor() {
+  constructor(private location: Location,
+              public dialog: MatDialog) {
 
   }
 
@@ -102,8 +106,6 @@ export class RecipeDetailsComponent implements OnInit {
       this.userFavorites = favorites;
 
       if(this.userFavorites!== undefined){
-        // console.log(this.userFavorites);
-        // console.log(this.userFavorites.favorite_recipe_ids);
         this.userFavorites.favorite_recipe_ids.push(<string>this.recipe?.id);
         this.userService.updateFavorites(this.userFavorites).subscribe();
         this.updateFavoritesStorage()
@@ -114,6 +116,29 @@ export class RecipeDetailsComponent implements OnInit {
   updateFavoritesStorage() {
     this.userService.getFavorites().subscribe(favorites => {
       localStorage.setItem('favorites', JSON.stringify(favorites))
+    });
+  }
+
+  deleteRecipe() {
+    const id = String(this.route.snapshot.paramMap.get('id'));
+
+    const dialogRef = this.dialog.open(DialogueDeleteRecipeComponent, {
+      width: '300px',
+      data: {}, disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.recipeService.deleteRecipe(id).subscribe();
+        this.updateRecipeStorage();
+        this.location.back()
+      }
+    });
+  }
+
+  private updateRecipeStorage() {
+    this.recipeService.getRecipes().subscribe(recipes => {
+      localStorage.setItem('recipes', JSON.stringify(recipes))
     });
   }
 }
