@@ -84,10 +84,6 @@ table{
   resize: none;
 }
 
-.step-text-container{
-
-}
-
 .recipe-steps{
   display: grid;
   grid-template-areas: "step delete";
@@ -97,6 +93,10 @@ table{
 
 .step{
   grid-area: step;
+}
+
+.button-add-step{
+  width: 200px;
 }
 
 .button-delete-step{
