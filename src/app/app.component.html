@@ -6,7 +6,7 @@
           <button mat-raised-button class="button-add-recipe" color="accent" routerLink="/new_recipe">
             <mat-icon>add</mat-icon>  Rezept hinzufügen
           </button>
-          <button mat-raised-button class="button-favorites" color="accent" aria-label="Heart icon">
+          <button mat-raised-button class="button-favorites" color="accent" aria-label="Heart icon" [routerLink]="['/favorites', '1']">
             <mat-icon>favorite</mat-icon> Favoriten
           </button>
         </mat-toolbar>

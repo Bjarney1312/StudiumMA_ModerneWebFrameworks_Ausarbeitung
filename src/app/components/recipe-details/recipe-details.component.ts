@@ -8,6 +8,8 @@ import {NgForOf} from "@angular/common";
 import {MatTableModule} from '@angular/material/table';
 import {Ingredient} from "../../data/ingredient";
 import {MatButtonModule} from '@angular/material/button';
+import {UserService} from "../../services/user.service";
+import {Favorites} from "../../data/favorites";
 
 @Component({
   selector: 'app-recipe-details',
@@ -25,9 +27,11 @@ import {MatButtonModule} from '@angular/material/button';
 export class RecipeDetailsComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   recipeService = inject(RecipeService);
+  userService: UserService = inject(UserService);
   recipe: Recipe | undefined;
   persons: number | undefined = 0;
   ingredients: Ingredient[] | undefined = [];
+  userFavorites: Favorites = {} as Favorites;
 
   dataSource: Ingredient[] = [];
 
@@ -91,4 +95,24 @@ export class RecipeDetailsComponent implements OnInit {
     }
   }
 
+  addToFavorites(userid: string){
+
+    this.userService.getFavorite(userid).subscribe(favorites =>{
+      this.userFavorites = favorites;
+
+      if(this.userFavorites!== undefined){
+        // console.log(this.userFavorites);
+        // console.log(this.userFavorites.favorite_recipe_ids);
+        this.userFavorites.favorite_recipe_ids.push(<string>this.recipe?.id);
+        this.userService.updateFavorites(this.userFavorites).subscribe();
+        this.updateFavoritesStorage()
+      }
+    });
+  }
+
+  updateFavoritesStorage() {
+    this.userService.getFavorites().subscribe(favorites => {
+      localStorage.setItem('favorites', JSON.stringify(favorites))
+    });
+  }
 }

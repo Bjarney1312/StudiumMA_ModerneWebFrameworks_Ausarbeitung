@@ -49,33 +49,33 @@ export class AppComponent implements OnInit{
         this.recipes = recipes;
       });
   }
-
-  add(recipe: Recipe): void {
-    if (!recipe) {
-      return;
-    }
-    this.recipeService.addRecipe(recipe as Recipe)
-      .subscribe(recipe => {
-        this.recipes.push(recipe);
-        localStorage.setItem('recipes', JSON.stringify(this.recipes));
-      });
-  }
-
-  openAddRecipeDialogue(): void {
-    const dialogRef = this.dialog.open(DialogueAddRecipeComponent, {
-      width: '560px',
-      data: {recipe: {}}, disableClose: true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-
-        console.log(result)
-        this.recipe = result;
-        this.add(this.recipe);
-      }
-    });
-  }
+  //
+  // add(recipe: Recipe): void {
+  //   if (!recipe) {
+  //     return;
+  //   }
+  //   this.recipeService.addRecipe(recipe as Recipe)
+  //     .subscribe(recipe => {
+  //       this.recipes.push(recipe);
+  //       localStorage.setItem('recipes', JSON.stringify(this.recipes));
+  //     });
+  // }
+  //
+  // openAddRecipeDialogue(): void {
+  //   const dialogRef = this.dialog.open(DialogueAddRecipeComponent, {
+  //     width: '560px',
+  //     data: {recipe: {}}, disableClose: true
+  //   });
+  //
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result !== undefined) {
+  //
+  //       console.log(result)
+  //       this.recipe = result;
+  //       this.add(this.recipe);
+  //     }
+  //   });
+  // }
 
 
 }

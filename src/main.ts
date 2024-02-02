@@ -2,13 +2,13 @@ import {bootstrapApplication, provideProtractorTestingSupport} from '@angular/pl
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
-import {routeConfig} from "./app/app.routes";
+import {routeConfig} from './app/app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {provideHttpClient} from "@angular/common/http";
 import {importProvidersFrom} from "@angular/core";
 import {HttpClientInMemoryWebApiModule} from "angular-in-memory-web-api";
 import {InMemoryDataService} from "./app/services/in-memory-data.service";
-import {MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 bootstrapApplication(AppComponent, {
     providers: [

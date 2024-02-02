@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Recipe } from "../data/recipe";
+import {Favorites} from "../data/favorites";
 
 @Injectable({
   providedIn: 'root'
@@ -38,13 +39,23 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     ];
 
-    if(localStorage.getItem('recipes') !== null){
+    let favorites: Favorites[] = [
+      {
+        "id": "1",
+        "favorite_recipe_ids": [""],
+      }
+    ];
+
+    if(localStorage.getItem('recipes') !== null && localStorage.getItem('favorites') !== null){
       recipes = JSON.parse(<string>localStorage.getItem('recipes')) || []
-      return {recipes};
+      favorites = JSON.parse(<string>localStorage.getItem('favorites')) || []
+      return {recipes, favorites};
     }
     else{
       localStorage.setItem('recipes', JSON.stringify(recipes))
-      return {recipes};
+      localStorage.setItem('favorites', JSON.stringify(favorites))
+      return {recipes, favorites};
     }
+
   }
 }
