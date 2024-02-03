@@ -40,6 +40,7 @@ export class RecipeDetailsComponent implements OnInit {
   dataSource: Ingredient[] = [];
 
   displayedColumns: string[] = ['Menge', 'Zutat'];
+  favorite_text: string = 'Zu Favoriten hinzufügen';
 
   constructor(private location: Location,
               public dialog: MatDialog) {
@@ -48,6 +49,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.loadRecipe();
+    this.loadFavorites('1');
   }
 
   loadRecipe(): void {
@@ -59,7 +61,19 @@ export class RecipeDetailsComponent implements OnInit {
         this.dataSource = recipe.ingredients;
         this.persons = recipe.persons;
       });
+  }
 
+  loadFavorites(userid: string){
+    this.userService.getFavorite(userid).subscribe(favorites => {
+      this.userFavorites = favorites;
+      if (this.userFavorites.favorite_recipe_ids.filter((id) => this.recipe?.id === id).length === 0) {
+        this.favorite_text = 'Zu Favoriten hinzufügen';
+      } else {
+        this.favorite_text = 'Aus Favoriten entfernen';
+      }
+      this.userService.updateFavorites(this.userFavorites).subscribe();
+      this.updateFavoritesStorage();
+    });
   }
 
   addPerson() {
@@ -100,17 +114,21 @@ export class RecipeDetailsComponent implements OnInit {
     }
   }
 
-  addToFavorites(userid: string){
+  addToFavorites(userid: string) {
 
-    this.userService.getFavorite(userid).subscribe(favorites =>{
-      this.userFavorites = favorites;
+      if (this.userFavorites !== undefined) {
 
-      if(this.userFavorites!== undefined){
-        this.userFavorites.favorite_recipe_ids.push(<string>this.recipe?.id);
-        this.userService.updateFavorites(this.userFavorites).subscribe();
-        this.updateFavoritesStorage()
+        if (this.userFavorites.favorite_recipe_ids.filter((id) => this.recipe?.id === id).length === 0) {
+          this.userFavorites.favorite_recipe_ids.push(<string>this.recipe?.id);
+          this.favorite_text = 'Aus Favoriten entfernen';
+        } else {
+          this.userFavorites.favorite_recipe_ids = this.userFavorites.favorite_recipe_ids.filter((id) => this.recipe?.id !== id);
+          this.favorite_text = 'Zu Favoriten hinzufügen';
+        }
       }
-    });
+      this.userService.updateFavorites(this.userFavorites).subscribe();
+      this.updateFavoritesStorage();
+
   }
 
   updateFavoritesStorage() {

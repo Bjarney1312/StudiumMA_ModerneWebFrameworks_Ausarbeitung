@@ -158,6 +158,7 @@ export class AddRecipeComponent implements OnInit {
     }
     if (this.recipe.ingredients.length === 0) {
       this.button_ingredients_disabled = true;
+      this.isLinear = true;
     }
   }
 
