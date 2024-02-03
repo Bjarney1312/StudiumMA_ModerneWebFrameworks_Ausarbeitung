@@ -36,7 +36,7 @@ export class RecipeDetailsComponent implements OnInit {
     userFavorites: Favorites = {} as Favorites;
 
     dataSource: Ingredient[] = [];
-    displayedColumns: string[] = ['Menge', 'Zutat'];
+    displayedColumns: string[] = ['Zutat', 'Menge'];
     favorite_text: string = 'Zu Favoriten hinzufügen';
 
     constructor(private dialog: MatDialog, private location: Location, private route: ActivatedRoute,
