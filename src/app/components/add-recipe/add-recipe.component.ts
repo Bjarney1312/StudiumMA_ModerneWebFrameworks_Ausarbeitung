@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -13,171 +13,215 @@ import {MatStepper, MatStepperModule} from '@angular/material/stepper';
 import {MatTable, MatTableModule} from '@angular/material/table';
 import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef} from "@angular/material/table";
 import {NgForOf} from "@angular/common";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-add-recipe',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatLabel,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
-    MatStepperModule,
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatRow,
-    MatRowDef,
-    MatTableModule,
-    NgForOf
-  ],
-  templateUrl: './add-recipe.component.html',
-  styleUrl: './add-recipe.component.css'
+    selector: 'app-add-recipe',
+    standalone: true,
+    imports: [
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatLabel,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSelectModule,
+        MatStepperModule,
+        MatCell,
+        MatCellDef,
+        MatColumnDef,
+        MatHeaderCell,
+        MatHeaderRow,
+        MatHeaderRowDef,
+        MatRow,
+        MatRowDef,
+        MatTableModule,
+        NgForOf
+    ],
+    templateUrl: './add-recipe.component.html',
+    styleUrl: './add-recipe.component.css'
 })
 
 export class AddRecipeComponent implements OnInit {
-  @ViewChild('ingredientTable') ingredientTable!: MatTable<Ingredient>;
-  @ViewChild('stepper') stepper!: MatStepper;
+    @ViewChild('ingredientTable') ingredientTable!: MatTable<Ingredient>;
+    @ViewChild('stepper') stepper!: MatStepper;
 
-  recipe: Recipe = {} as Recipe;
-  isLinear = true;
-  dataSource_ingredients: Ingredient[] = [];
-  recipes: Recipe[] = [];
+    recipe: Recipe = {} as Recipe;
+    recipes: Recipe[] = [];
 
-  displayedColumns: string[] = ['Zutat', 'Menge', 'Entfernen'];
+    displayedColumns: string[] = ['Zutat', 'Menge', 'Entfernen'];
+    dataSource_ingredients: Ingredient[] = [];
 
-  recipe_information = this.formBuilder.group({
-    name: ['', Validators.required],
-    preperation_time: '',
-    preperation_time_unit: 'Minuten',
-    total_time: '',
-    total_time_unit: 'Minuten',
-    image_url: '',
-    persons: 1,
-  });
+    button_ingredients_disabled: boolean = true;
+    button_steps_disabled: boolean = true;
+    isLinear: boolean = true;
 
-  ingredients = this.formBuilder.group({
-    ingredient: '',
-    amount: 0,
-    unit: 'g',
-  });
-
-  steps = this.formBuilder.group({
-    step: '',
-  });
-
-  button_ingredients_disabled: boolean = true;
-  button_steps_disabled: boolean = true;
-
-  constructor(private formBuilder: FormBuilder, private recipeService: RecipeService, private route: ActivatedRoute,
-              private router: Router) {
-  }
-
-  ngOnInit(): void {
-    this.recipe.id = uuidv4();
-    this.recipe.ingredients = [];
-    this.recipe.steps = [];
-    this.recipeService.getRecipes()
-      .subscribe(recipes => {
-        this.recipes = recipes;
-      });
-  }
-
-  onSubmit(): void {
-    if(this.recipe.ingredients.length === 0){
-      this.stepper.previous();
-    }
-    else{
-      this.saveRecipe(this.recipe)
-      this.updateStorage()
-      this.router.navigate(['/']);
-    }
-  }
-
-  saveRecipe(recipe: Recipe) {
-    if (!recipe) {
-      return;
-    }
-      this.recipeService.addRecipe(recipe as Recipe)
-        .subscribe(recipe => {
-          this.recipes.push(recipe);
-          localStorage.setItem('recipes', JSON.stringify(this.recipes));
-        });
-  }
-
-  updateStorage() {
-    this.recipeService.getRecipes().subscribe(recipes => {
-      localStorage.setItem('recipes', JSON.stringify(recipes))
+    // FormGroups
+    recipe_information = this.formBuilder.group({
+        name: ['', Validators.required],
+        preperation_time: '',
+        preperation_time_unit: 'Minuten',
+        total_time: '',
+        total_time_unit: 'Minuten',
+        image_url: '',
+        persons: 1,
     });
-  }
 
-  addRecipeInformation() {
-    this.recipe.name = <string>this.recipe_information.value.name;
-    this.recipe.persons = <number>this.recipe_information.value.persons;
-    this.recipe.preperation_time = <string>this.recipe_information.value.preperation_time + ' ' + this.recipe_information.value.preperation_time_unit;
-    this.recipe.total_time = <string>this.recipe_information.value.total_time + ' ' + this.recipe_information.value.total_time_unit;
-    this.recipe.photo = <string>this.recipe_information.value.image_url;
-  }
+    ingredients = this.formBuilder.group({
+        ingredient: '',
+        amount: 0,
+        unit: 'g',
+    });
 
-  addIngredient() {
+    steps = this.formBuilder.group({
+        step: '',
+    });
 
-    if (this.ingredients.value.ingredient !== '' && this.ingredients.value.ingredient !== null) {
-      let ingredient = {} as Ingredient;
+    constructor(private formBuilder: FormBuilder, private recipeService: RecipeService, private router: Router) {}
 
-      ingredient.ingredient = <string>this.ingredients.value.ingredient;
-      ingredient.amount = <number>this.ingredients.value.amount;
-      ingredient.unit = <string>this.ingredients.value.unit;
-
-      this.recipe.ingredients.push(ingredient);
-      this.dataSource_ingredients = this.recipe.ingredients;
-      this.ingredientTable.renderRows();
-      this.ingredients.reset();
-      this.ingredients.value.ingredient = '';
-
-      this.button_ingredients_disabled = false;
-      this.isLinear = false;
+    /*---------------------------------------------------------------------------------------------------
+                                                   Funktionen
+    -----------------------------------------------------------------------------------------------------*/
+    ngOnInit(): void {
+        this.recipe.id = uuidv4();
+        this.recipe.ingredients = [];
+        this.recipe.steps = [];
+        this.recipeService.getRecipes()
+            .subscribe(recipes => {
+                this.recipes = recipes;
+            });
     }
-  }
 
-  removeIngredient(element: Ingredient) {
-    for (let i = 0; i < this.recipe.ingredients.length; i++) {
-      if (element.ingredient === this.recipe.ingredients[i].ingredient) {
-        this.recipe.ingredients.splice(i, 1);
-        this.ingredientTable.renderRows();
-      }
+    /**
+     * Speichert das neue Rezept und führt den Nutzer wieder zur Startseite der Anwendung.
+     * Wurde über die obere Leiste des Steppers die Prüfung umgangen, ob sich Zutaten
+     * in der Zutatenliste befinden und diese ist leer, wird das Rezept nicht gespeichert
+     * und der Nutzer wird einen Schritt zurückgebracht.
+     */
+    protected onSubmit(): void {
+        if (this.recipe.ingredients.length === 0) {
+            this.stepper.previous();
+        } else {
+            this.saveRecipe(this.recipe)
+            this.updateStorage()
+            this.router.navigate(['/']);
+        }
     }
-    if (this.recipe.ingredients.length === 0) {
-      this.button_ingredients_disabled = true;
-      this.isLinear = true;
+
+    /**
+     * Speichert das Rezept in der Datenbank und aktualisiert den LocalStorage. Wird in der
+     * OnSubmit-Methode im Formular des letzten Schritts des Steppers zum Erstellen von Rezepten
+     * aufgerufen.
+     * @param recipe Rezept, dass gespeichert werden soll.
+     */
+    private saveRecipe(recipe: Recipe): void {
+        if (!recipe) {
+            return;
+        }
+        this.recipeService.addRecipe(recipe as Recipe)
+            .subscribe(recipe => {
+                this.recipes.push(recipe);
+                localStorage.setItem('recipes', JSON.stringify(this.recipes));
+            });
     }
-  }
 
-  addStep() {
-
-    if (this.steps.value.step !== '' && this.steps.value.step !== null) {
-      let step = <string>this.steps.value.step;
-      this.recipe.steps.push(step)
-      this.steps.reset();
-      this.button_steps_disabled = false;
+    /**
+     * Übernimmt die allgemeinen Rezeptinformationen, sobald der Button zum Abschließen des
+     * ersten Schritts vom Stepper geklickt wird.
+     */
+    protected addRecipeInformation(): void {
+        this.recipe.name = <string>this.recipe_information.value.name;
+        this.recipe.persons = <number>this.recipe_information.value.persons;
+        this.recipe.preperation_time = <string>this.recipe_information.value.preperation_time + ' ' + this.recipe_information.value.preperation_time_unit;
+        this.recipe.total_time = <string>this.recipe_information.value.total_time + ' ' + this.recipe_information.value.total_time_unit;
+        this.recipe.photo = <string>this.recipe_information.value.image_url;
     }
-  }
 
-  removeStep(element: number) {
-    this.recipe.steps.splice(element, 1);
-    if (this.recipe.steps.length === 0) {
-      this.button_steps_disabled = true;
+    /**
+     * Fügt der Zutatenliste des neuen Rezepts eine Zutat hinzu. Der Button um zum nächsten
+     * Schritt des Steppers zu gelangen bleibt bzw. wird aktiviert, da sich min. eine Zutat
+     * in der Zutatenliste befindet.
+     */
+    protected addIngredient(): void {
+        if (this.ingredients.value.ingredient !== '' && this.ingredients.value.ingredient !== null) {
+            let ingredient = {} as Ingredient;
+
+            ingredient.ingredient = <string>this.ingredients.value.ingredient;
+            ingredient.amount = <number>this.ingredients.value.amount;
+            ingredient.unit = <string>this.ingredients.value.unit;
+
+            this.recipe.ingredients.push(ingredient);
+            this.dataSource_ingredients = this.recipe.ingredients;
+            this.ingredientTable.renderRows();
+            this.ingredients.reset();
+            this.ingredients.value.ingredient = '';
+
+            this.button_ingredients_disabled = false;
+            this.isLinear = false;
+        }
     }
-  }
 
-  enableLinearMode() {
-    this.isLinear = true;
-  }
+    /**
+     * Entfernt eine Zutat aus der Zutatenliste des Rezepts. Der Nutzer kann nur zum
+     * nächsten Schritt des Steppers gehen, wenn sich mindestens eine Zutat in der Liste
+     * befindet. Andernfalls wird der Button für den nächsten Schritt deaktiviert.
+     * @param element Zutat, die entfernt werden soll
+     */
+    protected removeIngredient(element: Ingredient): void {
+        for (let i = 0; i < this.recipe.ingredients.length; i++) {
+            if (element.ingredient === this.recipe.ingredients[i].ingredient) {
+                this.recipe.ingredients.splice(i, 1);
+                this.ingredientTable.renderRows();
+            }
+        }
+        if (this.recipe.ingredients.length === 0) {
+            this.button_ingredients_disabled = true;
+            this.isLinear = true;
+        }
+    }
+
+    /**
+     * Fügt der Liste mit Zubereitungsschritten einen Schritt hinzu. Der Button zum Speichern
+     * des Rezepts bleibt bzw. wird deaktiviert, da sich min. ein Zubereitungsschritt in der
+     * Liste befindet.
+     */
+    protected addStep(): void {
+        if (this.steps.value.step !== '' && this.steps.value.step !== null) {
+            let step = <string>this.steps.value.step;
+            this.recipe.steps.push(step)
+            this.steps.reset();
+            this.button_steps_disabled = false;
+        }
+    }
+
+    /**
+     * Entfernt einen Zubereitungsschritt aus der Liste mit Zubereitungsschritten des Rezepts.
+     * Der Nutzer kann den Butten zum Speichern des Rezepts nur klicken, wenn sich mindestens ein
+     * Zubereitungsschritt in der Liste befindet. Andernfalls wird der Button deaktiviert.
+     * @param element Zubereitungsschritt, der entfernt werden soll
+     */
+    protected removeStep(element: number): void {
+        this.recipe.steps.splice(element, 1);
+        if (this.recipe.steps.length === 0) {
+            this.button_steps_disabled = true;
+        }
+    }
+
+    /**
+     * Methode zum Aktualisieren des LocalStorage.
+     */
+    private updateStorage(): void {
+        this.recipeService.getRecipes().subscribe(recipes => {
+            localStorage.setItem('recipes', JSON.stringify(recipes))
+        });
+    }
+
+    /**
+     * Aktiviert den linearen Modus des Steppers. Der Nutzer kann nur einen Schritt weiter gehen, wenn
+     * alle FormControls valide sind.
+     */
+    protected enableLinearMode(): void {
+        this.isLinear = true;
+    }
 }

@@ -1,12 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef, MatDialogTitle
-} from "@angular/material/dialog";
-import {MatButton} from "@angular/material/button";
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-dialogue-delete-recipe',
@@ -15,21 +9,21 @@ import {MatButton} from "@angular/material/button";
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-    MatButton,
+    MatButtonModule,
     MatDialogTitle
   ],
   templateUrl: './dialogue-delete-recipe.component.html',
   styleUrl: './dialogue-delete-recipe.component.css'
 })
-export class DialogueDeleteRecipeComponent implements OnInit {
+export class DialogueDeleteRecipeComponent {
 
   constructor(public dialogRef: MatDialogRef<DialogueDeleteRecipeComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
-  ngOnInit(): void {
-  }
-
+  /**
+   * Schließt den Dialog, ohne etwas zu tun, wenn der Nutzer auf Abbrechen klickt.
+   */
   onNoClick(): void {
     this.dialogRef.close();
   }

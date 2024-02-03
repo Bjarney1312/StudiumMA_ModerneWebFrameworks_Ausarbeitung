@@ -8,12 +8,16 @@ import {catchError, Observable, of} from "rxjs";
 })
 export class RecipeService {
 
-  constructor(private http: HttpClient) { }
-
-  private recipeURL = 'api/recipes';
+  recipeURL = 'api/recipes';
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
+
+  constructor(private http: HttpClient) { }
+
+  /*---------------------------------------------------------------------------------------------------
+                                                Funktionen
+  -----------------------------------------------------------------------------------------------------*/
 
   /** GET - Request: Holt alle Rezepte vom Server */
   getRecipes(): Observable<Recipe[]> {

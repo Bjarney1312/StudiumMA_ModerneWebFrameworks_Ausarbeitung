@@ -1,18 +1,18 @@
 <a [routerLink]="['/details', recipe.id]" class="recipe-link">
-  <div class="listing-container">
-    <section class="listing">
-      <div class="photo-container">
-        <img class="listing-photo" [src]="recipe.photo">
-      </div>
-      <div class="recipe-information">
-        <h2 class="listing-heading">{{ recipe.name }}</h2>
-        <div class="listing-info">
-          <mat-icon color="accent">alarm</mat-icon>
-          <div class="text">{{ recipe.total_time}}</div>
-          <mat-icon color="accent">person</mat-icon>
-          <div class="text">{{recipe.persons}}</div>
-        </div>
-      </div>
-    </section>
-  </div>
+    <div class="listing-container">
+        <section class="listing">
+            <div class="photo-container">
+                <img class="listing-photo" [src]="recipe.photo">
+            </div>
+            <div class="recipe-information">
+                <h2 class="listing-heading">{{ recipe.name }}</h2>
+                <div class="listing-info">
+                    <mat-icon color="accent">alarm</mat-icon>
+                    <div class="text">{{ recipe.total_time}}</div>
+                    <mat-icon color="accent">person</mat-icon>
+                    <div class="text">{{recipe.persons}}</div>
+                </div>
+            </div>
+        </section>
+    </div>
 </a>

@@ -5,7 +5,6 @@ import {AddRecipeComponent} from "./components/add-recipe/add-recipe.component";
 import {FavoritesComponent} from "./components/favorites/favorites.component";
 import {UpdateRecipeComponent} from "./components/update-recipe/update-recipe.component";
 
-
 export const routeConfig: Routes = [
     {
         path: '',

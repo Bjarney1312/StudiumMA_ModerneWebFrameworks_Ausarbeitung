@@ -1,108 +1,104 @@
-.add-recipe-container{
-  width: 60%;
-  margin: 50px auto 0;
+.add-recipe-container {
+    width: 60%;
+    margin: 50px auto 0;
 }
 
-.add-recipe-form{
-  margin-top: 30px;
+.add-recipe-form {
+    margin-top: 30px;
 }
 
-.recipe-table-input{
-  width: 100%;
+table {
+    width: 100%;
 }
 
-/*.recipe-table-input-small{*/
-/*  width: 50%;*/
-/*}*/
-
-table{
-  width: 100%;
+.recipe-table-input {
+    width: 100%;
 }
 
-.button-container{
-  display: flex;
-  justify-content: center;
+.button-container {
+    display: flex;
+    justify-content: center;
 }
 
-.button-stepper{
-  width: 200px;
-  margin-left: 5px;
-  margin-right: 5px;
+.button-stepper {
+    width: 200px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
-.button-add-ingredient{
-  height: 50px;
-  width: 50px;
+.table-ingredients {
+    margin-bottom: 30px;
 }
 
-.button-add-container{
-  margin-bottom: 20px;
-  grid-area: button;
-  margin-left: 5px;
-  margin-right: 20px;
+.mat-column-Entfernen {
+    width: 50px;
 }
 
-.table-ingredients{
-  margin-bottom: 30px;
+.button-delete-ingredient {
+    height: 70px;
+    width: 70px;
 }
 
-.mat-column-Entfernen{
-  width: 50px;
+.mat-column-TEST {
+    width: 50px;
 }
 
-.button-delete-ingredient{
-  height: 70px;
-  width: 70px;
+.add-ingredient-container {
+    display: grid;
+    grid-template-areas: "ingredient amount unit button";
+    grid-template-columns: auto 200px 200px 50px;
 }
 
-.mat-column-TEST{
-  width: 50px;
+.button-add-ingredient-container {
+    margin-bottom: 20px;
+    grid-area: button;
+    margin-left: 5px;
+    margin-right: 20px;
 }
 
-.add-ingredient-container{
-  display: grid;
-  grid-template-areas: "ingredient amount unit button";
-  grid-template-columns: auto 200px 200px 50px;
+.button-add-ingredient {
+    height: 50px;
+    width: 50px;
 }
 
-.ingredient{
-  grid-area: ingredient;
+.ingredient {
+    grid-area: ingredient;
 }
 
-.amount{
-  grid-area: amount;
-  margin-left: 5px;
+.amount {
+    grid-area: amount;
+    margin-left: 5px;
 }
 
-.unit{
-  grid-area: unit;
-  margin-left: 5px;
+.unit {
+    grid-area: unit;
+    margin-left: 5px;
 }
 
-.textarea-steps{
-  resize: none;
+.textarea-steps {
+    resize: none;
 }
 
-.recipe-steps{
-  display: grid;
-  grid-template-areas: "step delete";
-  grid-template-columns: auto 100px;
-  margin-bottom: 50px;
+.recipe-steps {
+    display: grid;
+    grid-template-areas: "step delete";
+    grid-template-columns: auto 100px;
+    margin-bottom: 50px;
 }
 
-.step{
-  grid-area: step;
+.step {
+    grid-area: step;
 }
 
-.button-add-step{
-  width: 200px;
+.button-add-step {
+    width: 200px;
 }
 
-.button-delete-step{
-  grid-area: delete;
-  justify-self: end;
+.button-delete-step {
+    grid-area: delete;
+    justify-self: end;
 }
 
 .icon-2x {
-  transform: scale(2);
+    transform: scale(2);
 }

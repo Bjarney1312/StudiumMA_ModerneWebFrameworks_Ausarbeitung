@@ -15,148 +15,176 @@ import {Location} from '@angular/common';
 import {DialogueDeleteRecipeComponent} from "../dialogue-delete-recipe/dialogue-delete-recipe.component";
 
 @Component({
-  selector: 'app-recipe-details',
-  standalone: true,
-  imports: [
-    MatChipsModule,
-    MatIcon,
-    NgForOf,
-    MatTableModule,
-    MatButtonModule,
-    RouterLink
-  ],
-  templateUrl: './recipe-details.component.html',
-  styleUrl: './recipe-details.component.css'
+    selector: 'app-recipe-details',
+    standalone: true,
+    imports: [
+        MatChipsModule,
+        MatIcon,
+        NgForOf,
+        MatTableModule,
+        MatButtonModule,
+        RouterLink
+    ],
+    templateUrl: './recipe-details.component.html',
+    styleUrl: './recipe-details.component.css'
 })
 export class RecipeDetailsComponent implements OnInit {
-  route: ActivatedRoute = inject(ActivatedRoute);
-  recipeService = inject(RecipeService);
-  userService: UserService = inject(UserService);
-  recipe: Recipe | undefined;
-  persons: number | undefined = 0;
-  ingredients: Ingredient[] | undefined = [];
-  userFavorites: Favorites = {} as Favorites;
 
-  dataSource: Ingredient[] = [];
+    recipe: Recipe | undefined;
+    persons: number | undefined = 0;
+    ingredients: Ingredient[] | undefined = [];
+    userFavorites: Favorites = {} as Favorites;
 
-  displayedColumns: string[] = ['Menge', 'Zutat'];
-  favorite_text: string = 'Zu Favoriten hinzufügen';
+    dataSource: Ingredient[] = [];
+    displayedColumns: string[] = ['Menge', 'Zutat'];
+    favorite_text: string = 'Zu Favoriten hinzufügen';
 
-  constructor(private location: Location,
-              public dialog: MatDialog) {
+    constructor(private dialog: MatDialog, private location: Location, private route: ActivatedRoute,
+                private recipeService: RecipeService, private userService: UserService) {}
 
-  }
+    /*---------------------------------------------------------------------------------------------------
+                                                     Funktionen
+      -----------------------------------------------------------------------------------------------------*/
 
-  ngOnInit() {
-    this.loadRecipe();
-    this.loadFavorites('1');
-  }
-
-  loadRecipe(): void {
-    const id = String(this.route.snapshot.paramMap.get('id'));
-    this.recipeService.getRecipe(id)
-      .subscribe(recipe => {
-        this.recipe = recipe;
-        this.ingredients = recipe.ingredients;
-        this.dataSource = recipe.ingredients;
-        this.persons = recipe.persons;
-      });
-  }
-
-  loadFavorites(userid: string){
-    this.userService.getFavorite(userid).subscribe(favorites => {
-      this.userFavorites = favorites;
-      if (this.userFavorites.favorite_recipe_ids.filter((id) => this.recipe?.id === id).length === 0) {
-        this.favorite_text = 'Zu Favoriten hinzufügen';
-      } else {
-        this.favorite_text = 'Aus Favoriten entfernen';
-      }
-      this.userService.updateFavorites(this.userFavorites).subscribe();
-      this.updateFavoritesStorage();
-    });
-  }
-
-  addPerson() {
-    if (this.persons !== undefined && this.recipe !== undefined) {
-
-      this.persons += 1;
-
-      let regularNumberOfPersons = this.recipe.persons;
-      let newNumberOfPersons = this.persons;
-
-      this.ingredients = this.recipe.ingredients.map(ingredient => {
-        return {
-          ingredient: ingredient.ingredient,
-          amount: (ingredient.amount / regularNumberOfPersons) * newNumberOfPersons,
-          unit: ingredient.unit
-        };
-      });
-      this.dataSource = this.ingredients;
+    ngOnInit() {
+        this.loadRecipe();
+        this.loadFavorites('1');
     }
-  }
 
-
-  removePerson() {
-    if (this.persons !== undefined && this.recipe !== undefined && this.persons > 0) {
-      this.persons -= 1;
-
-      let regularNumberOfPersons = this.recipe.persons;
-      let newNumberOfPersons = this.persons;
-
-      this.ingredients = this.recipe.ingredients.map(ingredient => {
-        return {
-          ingredient: ingredient.ingredient,
-          amount: (ingredient.amount / regularNumberOfPersons) * newNumberOfPersons,
-          unit: ingredient.unit
-        };
-      });
-      this.dataSource = this.ingredients;
+    /**
+     * Lädt das von Nutzer ausgewählte Rezept anhand der ID aus der Rezeptdatenbank.
+     */
+    private loadRecipe(): void {
+        const id = String(this.route.snapshot.paramMap.get('id'));
+        this.recipeService.getRecipe(id)
+            .subscribe(recipe => {
+                this.recipe = recipe;
+                this.ingredients = recipe.ingredients;
+                this.dataSource = recipe.ingredients;
+                this.persons = recipe.persons;
+            });
     }
-  }
 
-  addToFavorites(userid: string) {
+    /**
+     * Lädt die Favoriten des Benutzers.
+     * @param userid ID des Benutzers
+     */
+    private loadFavorites(userid: string): void {
+        this.userService.getFavorite(userid).subscribe(favorites => {
+            this.userFavorites = favorites;
+            if (this.userFavorites.favorite_recipe_ids.filter((id) => this.recipe?.id === id).length === 0) {
+                this.favorite_text = 'Zu Favoriten hinzufügen';
+            } else {
+                this.favorite_text = 'Aus Favoriten entfernen';
+            }
+            this.userService.updateFavorites(this.userFavorites).subscribe();
+            this.updateFavoritesStorage();
+        });
+    }
 
-      if (this.userFavorites !== undefined) {
+    /**
+     * Fügt der Anzahl der Personen für das Rezept eine Person hinzu und berechnet die Mengen der Zutaten neu.
+     */
+    protected addPerson(): void {
+        if (this.persons !== undefined && this.recipe !== undefined) {
 
-        if (this.userFavorites.favorite_recipe_ids.filter((id) => this.recipe?.id === id).length === 0) {
-          this.userFavorites.favorite_recipe_ids.push(<string>this.recipe?.id);
-          this.favorite_text = 'Aus Favoriten entfernen';
-        } else {
-          this.userFavorites.favorite_recipe_ids = this.userFavorites.favorite_recipe_ids.filter((id) => this.recipe?.id !== id);
-          this.favorite_text = 'Zu Favoriten hinzufügen';
+            this.persons += 1;
+
+            let regularNumberOfPersons = this.recipe.persons;
+            let newNumberOfPersons = this.persons;
+
+            this.ingredients = this.recipe.ingredients.map(ingredient => {
+                return {
+                    ingredient: ingredient.ingredient,
+                    amount: (ingredient.amount / regularNumberOfPersons) * newNumberOfPersons,
+                    unit: ingredient.unit
+                };
+            });
+            this.dataSource = this.ingredients;
         }
-      }
-      this.userService.updateFavorites(this.userFavorites).subscribe();
-      this.updateFavoritesStorage();
+    }
 
-  }
+    /**
+     * Entfernt eine Person von der Anzahl der Personen für das Rezept und berechnet die Mengen der Zutaten neu.
+     */
+    protected removePerson(): void {
+        if (this.persons !== undefined && this.recipe !== undefined && this.persons > 0) {
+            this.persons -= 1;
 
-  updateFavoritesStorage() {
-    this.userService.getFavorites().subscribe(favorites => {
-      localStorage.setItem('favorites', JSON.stringify(favorites))
-    });
-  }
+            let regularNumberOfPersons = this.recipe.persons;
+            let newNumberOfPersons = this.persons;
 
-  deleteRecipe() {
-    const id = String(this.route.snapshot.paramMap.get('id'));
+            this.ingredients = this.recipe.ingredients.map(ingredient => {
+                return {
+                    ingredient: ingredient.ingredient,
+                    amount: (ingredient.amount / regularNumberOfPersons) * newNumberOfPersons,
+                    unit: ingredient.unit
+                };
+            });
+            this.dataSource = this.ingredients;
+        }
+    }
 
-    const dialogRef = this.dialog.open(DialogueDeleteRecipeComponent, {
-      width: '300px',
-      data: {}, disableClose: true
-    });
+    /**
+     * Fügt das Rezept zur Favoritenliste des Benutzers hinzu oder entfernt es, wenn es sich bereits in der
+     * Favoritenliste befindet. Aktualisiert den LocalStorage entsprechend.
+     */
+    protected addToFavorites(): void {
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-        this.recipeService.deleteRecipe(id).subscribe();
-        this.updateRecipeStorage();
-        this.location.back()
-      }
-    });
-  }
+        if (this.userFavorites !== undefined) {
 
-  private updateRecipeStorage() {
-    this.recipeService.getRecipes().subscribe(recipes => {
-      localStorage.setItem('recipes', JSON.stringify(recipes))
-    });
-  }
+            if (this.userFavorites.favorite_recipe_ids.filter((id) => this.recipe?.id === id).length === 0) {
+                this.userFavorites.favorite_recipe_ids.push(<string>this.recipe?.id);
+                this.favorite_text = 'Aus Favoriten entfernen';
+            } else {
+                this.userFavorites.favorite_recipe_ids = this.userFavorites.favorite_recipe_ids.filter((id) => this.recipe?.id !== id);
+                this.favorite_text = 'Zu Favoriten hinzufügen';
+            }
+        }
+        this.userService.updateFavorites(this.userFavorites).subscribe();
+        this.updateFavoritesStorage();
+    }
+
+
+    /**
+     * Löscht das Rezept und führt den Nutzer zur Startseite der Anwendung.
+     * @protected
+     */
+    protected deleteRecipe(): void {
+        const id = String(this.route.snapshot.paramMap.get('id'));
+
+        const dialogRef = this.dialog.open(DialogueDeleteRecipeComponent, {
+            width: '300px',
+            data: {}, disableClose: true
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result !== undefined) {
+                this.recipeService.deleteRecipe(id).subscribe();
+                this.updateRecipeStorage();
+                this.location.back()
+            }
+        });
+    }
+
+    /**
+     * Aktualisiert den LocalStorage für die Rezepte.
+     * @private
+     */
+    private updateRecipeStorage(): void {
+        this.recipeService.getRecipes().subscribe(recipes => {
+            localStorage.setItem('recipes', JSON.stringify(recipes))
+        });
+    }
+
+    /**
+     * Aktualisiert den LocalStorage für die Favoriten.
+     * @private
+     */
+    private updateFavoritesStorage(): void {
+        this.userService.getFavorites().subscribe(favorites => {
+            localStorage.setItem('favorites', JSON.stringify(favorites))
+        });
+    }
+
 }

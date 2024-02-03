@@ -22,50 +22,58 @@ import {Favorites} from "../../data/favorites";
     styleUrl: './favorites.component.css'
 })
 export class FavoritesComponent implements OnInit {
+
     recipeList: Recipe[] = []
     favorites: Favorites = {} as Favorites;
     favoriteList: Recipe[] = []
-    recipeService: RecipeService = inject(RecipeService);
-    userService: UserService = inject(UserService)
     filteredFavoritesList: Recipe[] = []
 
+    constructor(private recipeService: RecipeService, private userService: UserService ) {}
+
+    /*---------------------------------------------------------------------------------------------------
+                                                    Funktionen
+     -----------------------------------------------------------------------------------------------------*/
     ngOnInit(): void {
         this.getRecipes();
         this.getFavorites("1");
     }
 
-    /*---------------------------------------------------------------------------------------------------
-                                             Funktionen
-    -----------------------------------------------------------------------------------------------------*/
-
-    getRecipes(): void {
+    /**
+     * Lädt die vorhandenen Rezepte aus der Datenbank.
+     */
+    private getRecipes(): void {
         this.recipeService.getRecipes()
             .subscribe(recipes => {
                 this.recipeList = recipes;
             });
     }
 
-    filterResults(text: string) {
+    /**
+     * Lädt die Favoriten des Benutzers.
+     * @param userid ID des Benutzers
+     */
+    private getFavorites(userid: string): void {
+        this.userService.getFavorite(userid).subscribe(favorites => {
+            this.favorites = favorites;
+
+            this.favoriteList = this.recipeList.filter(recipe => this.favorites.favorite_recipe_ids
+                .map(recipe_id => recipe_id).includes(recipe.id));
+
+            this.filteredFavoritesList = this.favoriteList;
+        })
+    }
+
+    /**
+     * Filtert die Rezepte bei einer Suchanfrage des Benutzers.
+     * @param text Rezeptname, nach dem gesucht wird.
+     */
+    protected filterResults(text: string): void {
         if (!text) {
             this.filteredFavoritesList = this.favoriteList;
             return;
         }
-
         this.filteredFavoritesList = this.favoriteList.filter(
             recipe => recipe?.name.toLowerCase().includes(text.toLowerCase())
         );
-    }
-
-    getFavorites(userid: string){
-        this.userService.getFavorite(userid).subscribe(favorites => {
-            this.favorites = favorites;
-            console.log(this.favorites.favorite_recipe_ids)
-
-            this.favoriteList = this.recipeList.filter(
-                x => this.favorites.favorite_recipe_ids
-                    .map(y => y).includes(x.id));
-
-            this.filteredFavoritesList = this.favoriteList;
-        })
     }
 }
