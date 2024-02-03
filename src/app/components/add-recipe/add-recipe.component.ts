@@ -128,7 +128,6 @@ export class AddRecipeComponent implements OnInit {
   }
 
   addIngredient() {
-    console.log(this.ingredients.value.ingredient)
 
     if (this.ingredients.value.ingredient !== '' && this.ingredients.value.ingredient !== null) {
       let ingredient = {} as Ingredient;
@@ -146,7 +145,6 @@ export class AddRecipeComponent implements OnInit {
       this.button_ingredients_disabled = false;
       this.isLinear = false;
     }
-
   }
 
   removeIngredient(element: Ingredient) {

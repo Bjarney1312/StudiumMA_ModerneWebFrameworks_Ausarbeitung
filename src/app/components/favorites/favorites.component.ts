@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {MatIconModule} from "@angular/material/icon";
-import {MatMiniFabButton} from "@angular/material/button";
+import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import {NgForOf} from "@angular/common";
 import {RecipesComponent} from "../recipes/recipes.component";
 import {Recipe} from "../../data/recipe";
@@ -15,7 +15,8 @@ import {Favorites} from "../../data/favorites";
         MatIconModule,
         MatMiniFabButton,
         NgForOf,
-        RecipesComponent
+        RecipesComponent,
+        MatButton
     ],
     templateUrl: './favorites.component.html',
     styleUrl: './favorites.component.css'

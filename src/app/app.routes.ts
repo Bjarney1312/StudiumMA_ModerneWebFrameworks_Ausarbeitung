@@ -20,16 +20,16 @@ export const routeConfig: Routes = [
     {
         path: 'new_recipe',
         component: AddRecipeComponent,
-        title: 'My Cooking Recipes'
+        title: 'Rezept hinzufügen'
     },
     {
         path: 'favorites/:id',
         component: FavoritesComponent,
-        title: 'My Favorites'
+        title: 'Meine Favoriten'
     },
     {
         path: 'update_recipe/:id',
         component: UpdateRecipeComponent,
-        title: 'Update Recipe'
+        title: 'Rezept bearbeiten'
     }
 ];
