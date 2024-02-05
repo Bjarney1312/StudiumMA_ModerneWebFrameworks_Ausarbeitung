@@ -5,7 +5,6 @@ describe('Recipe-Details test', () => {
   });
 
   it('visits the first test recipe', () => {
-    cy.visit('/details/0')
     cy.url().should('eq', 'http://localhost:4200/details/0');
     cy.location('pathname').should('eq', '/details/0');
   })
@@ -67,9 +66,3 @@ describe('Recipe-Details test', () => {
 
   });
 })
-
-// recipe-details-persons
-// recipe-details-add-person
-// recipe-details-remove-person
-
-
