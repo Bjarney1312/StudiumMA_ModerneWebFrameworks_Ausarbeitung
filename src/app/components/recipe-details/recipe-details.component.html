@@ -5,12 +5,12 @@
             <h1 class="listing-heading" data-testid="recipe-details-name">{{recipe?.name}}</h1>
             <div class="recipe-details-button-container">
                 <button mat-raised-button class="button-recipe-details" color="accent" aria-label="Button update recipe"
-                        [routerLink]="['/update_recipe', recipe?.id]">
+                        [routerLink]="['/update_recipe', recipe?.id]" data-testid="recipe-details-button-update">
                     <mat-icon>mode</mat-icon>
                     Bearbeiten
                 </button>
                 <button mat-raised-button class="button-delete-recipe button-recipe-details" color="accent"
-                        aria-label="Button delete recipe" (click)="deleteRecipe()">
+                        aria-label="Button delete recipe" (click)="deleteRecipe()" data-testid="recipe-details-button-delete">
                     <mat-icon>delete</mat-icon>
                     Löschen
                 </button>
