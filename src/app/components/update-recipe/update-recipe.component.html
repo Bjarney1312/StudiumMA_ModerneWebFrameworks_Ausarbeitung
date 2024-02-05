@@ -11,14 +11,14 @@
                             <mat-form-field appearance="fill" class="recipe-table-input">
                                 <mat-label>Name</mat-label>
                                 <input matInput required id="name" type="text" class="recipe-table-input"
-                                       formControlName="name" value="{{recipe.name}}">
+                                       formControlName="name" value="{{recipe.name}}" data-testid="update-recipe-name">
                             </mat-form-field>
                         </td>
                         <td>
                             <mat-form-field appearance="fill" class="recipe-table-input">
                                 <mat-label>Personen</mat-label>
                                 <input matInput id="persons" type="number" formControlName="persons" min="0"
-                                       value="{{recipe.persons}}">
+                                       value="{{recipe.persons}}" data-testid="update-recipe-persons">
                             </mat-form-field>
                         </td>
                     </tr>
@@ -28,7 +28,7 @@
                             <mat-form-field appearance="fill" class="recipe-table-input">
                                 <mat-label>Vorbereitungszeit</mat-label>
                                 <input matInput id="preperation-time" type="number" formControlName="preperation_time"
-                                       min="0" value="{{prep_time}}">
+                                       min="0" value="{{prep_time}}" data-testid="update-recipe-preptime">
                             </mat-form-field>
                         </td>
                         <td>
@@ -47,7 +47,7 @@
                             <mat-form-field appearance="fill" class="recipe-table-input">
                                 <mat-label>Gesamtdauer</mat-label>
                                 <input matInput id="total-time" type="number" formControlName="total_time" min="0"
-                                       value="{{total_time}}">
+                                       value="{{total_time}}" data-testid="update-recipe-totaltime">
                             </mat-form-field>
                         </td>
                         <td>
@@ -66,7 +66,7 @@
                             <mat-form-field appearance="fill" class="recipe-table-input">
                                 <mat-label>Bild-URL</mat-label>
                                 <input matInput id="image" type="text" formControlName="image_url"
-                                       value="{{recipe.photo}}">
+                                       value="{{recipe.photo}}" data-testid="update-recipe-image">
                             </mat-form-field>
                         </td>
                     </tr>
@@ -74,7 +74,7 @@
 
                 <div class="button-container">
                     <button mat-raised-button matStepperNext color="accent" class="button-stepper"
-                            (click)="updateRecipeInformation()">Weiter
+                            (click)="updateRecipeInformation()" data-testid="update-recipe-button-step1-forward">Weiter
                     </button>
                 </div>
             </form>
@@ -86,12 +86,12 @@
                 <div class="add-ingredient-container">
                     <mat-form-field appearance="fill" class="ingredient">
                         <mat-label>Zutat</mat-label>
-                        <input matInput id="ingredient" type="text" formControlName="ingredient" required>
+                        <input matInput id="ingredient" type="text" formControlName="ingredient" required data-testid="update-recipe-input-ingredient">
                     </mat-form-field>
 
                     <mat-form-field appearance="fill" class="amount">
                         <mat-label>Menge</mat-label>
-                        <input matInput id="amount" type="number" formControlName="amount">
+                        <input matInput id="amount" type="number" formControlName="amount" data-testid="update-recipe-input-amount">
                     </mat-form-field>
 
                     <mat-form-field class="unit">
@@ -109,7 +109,7 @@
 
                     <div class="button-add-ingredient-container">
                         <button mat-mini-fab class="button-add-ingredient" color="accent"
-                                aria-label="Add ingredient" (click)="addIngredient()"> +
+                                aria-label="Add ingredient" (click)="addIngredient()" data-testid="update-recipe-button-ingredient"> +
                         </button>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                         (click)="enableLinearMode()">Zurück
                 </button>
                 <button mat-raised-button matStepperNext color="accent" class="button-stepper"
-                        disabled="{{button_ingredients_disabled}}">Weiter
+                        disabled="{{button_ingredients_disabled}}" data-testid="update-recipe-button-step2-forward">Weiter
                 </button>
             </div>
         </mat-step>
@@ -160,21 +160,21 @@
                     <mat-form-field appearance="fill" class="recipe-table-input">
                         <mat-label>Zubereitungsschritt</mat-label>
                         <textarea matInput id="step" type="text" formControlName="step" class="textarea-steps"
-                                  required></textarea>
+                                  required data-testid="update-recipe-input-step"></textarea>
                     </mat-form-field>
                 </div>
 
                 <div class="button-container">
                     <button mat-raised-button class="button-add-step" color="accent" aria-label="Add step"
                             (click)="addStep()"
-                            type="button">
+                            type="button" data-testid="update-recipe-button-step">
                         Schritt hinzufügen
                     </button>
                 </div>
 
                 <section class="listing-features">
                     <h2>Zubereitung:</h2>
-                    <div class="recipe-steps" *ngFor="let step of recipe?.steps, index as i">
+                    <div class="recipe-steps" *ngFor="let step of recipe?.steps, index as i" data-testid="update-recipe-steplist">
                         <div class="step">
                             {{step}}
                         </div>
@@ -189,7 +189,7 @@
                 <div class="button-container">
                     <button mat-raised-button class="button-stepper" matStepperPrevious color="primary">Zurück</button>
                     <button mat-raised-button class="button-stepper" color="accent" aria-label="Heart icon"
-                            type="submit" disabled="{{button_steps_disabled}}">
+                            type="submit" disabled="{{button_steps_disabled}}" data-testid="update-recipe-button-step3-forward">
                         Rezept Speichern
                     </button>
                 </div>

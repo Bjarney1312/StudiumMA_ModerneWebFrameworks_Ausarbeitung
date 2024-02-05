@@ -25,5 +25,4 @@ describe('Recipe-Details test', () => {
         cy.url().should('eq', 'http://localhost:4200/');
         cy.get('[data-testid="recipe-card"]').should('have.length', 3);
     });
-
 })
