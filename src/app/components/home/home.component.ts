@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RecipesComponent} from '../recipes/recipes.component';
 import {RecipeService} from "../../services/recipe.service";
 import {NgForOf} from "@angular/common";

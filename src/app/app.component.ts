@@ -27,7 +27,7 @@ import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
     templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-    title = 'My cooking recipes';
+    title = 'My Cooking Recipes';
 
     recipes: Recipe[] = [];
     recipe!: Recipe;

@@ -1,11 +1,11 @@
 <a [routerLink]="['/details', recipe.id]" class="recipe-link">
-    <div class="listing-container">
+    <div class="listing-container" data-testid="recipe-card">
         <section class="listing">
             <div class="photo-container">
                 <img class="listing-photo" [src]="recipe.photo">
             </div>
             <div class="recipe-information">
-                <h2 class="listing-heading">{{ recipe.name }}</h2>
+                <h2 class="listing-heading" data-testid="recipe-card-name">{{ recipe.name }}</h2>
                 <div class="listing-info">
                     <mat-icon color="accent">alarm</mat-icon>
                     <div class="text">{{ recipe.total_time}}</div>
