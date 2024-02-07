@@ -8,6 +8,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close (click)="onNoClick()">Abbrechen</button>
-    <button mat-raised-button [mat-dialog-close]="data" color="warn">Entfernen</button>
+    <button mat-button mat-dialog-close (click)="onNoClick()" data-testid="delete-dialogue-button-cancel">Abbrechen</button>
+    <button mat-raised-button [mat-dialog-close]="data" color="warn" data-testid="delete-dialogue-button-delete">Entfernen</button>
 </mat-dialog-actions>

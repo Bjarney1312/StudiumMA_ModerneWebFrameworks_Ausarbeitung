@@ -1,9 +1,9 @@
 <div class="home-view">
     <section class="head-area">
-        <h2>Meine Rezepte</h2>
+        <h2 data-testid="home-h1">Meine Rezepte</h2>
         <div class="search">
-            <input #searchBox type="text" placeholder="Rezept suchen">
-            <button mat-raised-button color="accent" (click)="filterResults(searchBox.value)" class="button-search">
+            <input #searchBox type="text" placeholder="Rezept suchen" data-testid="home-input-search">
+            <button mat-raised-button color="accent" (click)="filterResults(searchBox.value)" class="button-search" data-testid="home-button-search">
                 <mat-icon>search</mat-icon>
                 Suchen
             </button>
