@@ -1,4 +1,4 @@
-describe('Recipe-Details test', () => {
+describe('Delete recipe test', () => {
 
     beforeEach(() => {
         cy.visit('/');

@@ -12,13 +12,13 @@
                             <mat-form-field appearance="fill" class="recipe-table-input">
                                 <mat-label>Name</mat-label>
                                 <input matInput required id="name" type="text" class="recipe-table-input"
-                                       formControlName="name">
+                                       formControlName="name" data-testid="add-recipe-name">
                             </mat-form-field>
                         </td>
                         <td>
                             <mat-form-field appearance="fill" class="recipe-table-input">
                                 <mat-label>Personen</mat-label>
-                                <input matInput id="persons" type="number" formControlName="persons" min="0">
+                                <input matInput id="persons" type="number" formControlName="persons" min="0" data-testid="add-recipe-persons">
                             </mat-form-field>
                         </td>
                     </tr>
@@ -28,13 +28,13 @@
                             <mat-form-field appearance="fill" class="recipe-table-input">
                                 <mat-label>Vorbereitungszeit</mat-label>
                                 <input matInput id="preperation-time" type="number" formControlName="preperation_time"
-                                       min="0">
+                                       min="0" data-testid="add-recipe-preptime">
                             </mat-form-field>
                         </td>
                         <td>
                             <mat-form-field class="recipe-table-input">
                                 <mat-label>Einheit</mat-label>
-                                <select matNativeControl formControlName="preperation_time_unit">
+                                <select matNativeControl formControlName="preperation_time_unit" data-testid="add-recipe-preptime-unit">
                                     <option value="Minuten">Minuten</option>
                                     <option value="Stunden">Stunden</option>
                                 </select>
@@ -46,13 +46,13 @@
                         <td>
                             <mat-form-field appearance="fill" class="recipe-table-input">
                                 <mat-label>Gesamtdauer</mat-label>
-                                <input matInput id="total-time" type="number" formControlName="total_time" min="0">
+                                <input matInput id="total-time" type="number" formControlName="total_time" min="0" data-testid="add-recipe-totaltime">
                             </mat-form-field>
                         </td>
                         <td>
                             <mat-form-field class="recipe-table-input">
                                 <mat-label>Einheit</mat-label>
-                                <select matNativeControl formControlName="total_time_unit">
+                                <select matNativeControl formControlName="total_time_unit" data-testid="add-recipe-preptime-unit">
                                     <option value="Minuten">Minuten</option>
                                     <option value="Stunden">Stunden</option>
                                 </select>
@@ -64,7 +64,7 @@
                         <td colspan="2">
                             <mat-form-field appearance="fill" class="recipe-table-input">
                                 <mat-label>Bild-URL</mat-label>
-                                <input matInput id="image" type="text" formControlName="image_url">
+                                <input matInput id="image" type="text" formControlName="image_url" data-testid="add-recipe-image">
                             </mat-form-field>
                         </td>
                     </tr>
@@ -72,7 +72,7 @@
 
                 <div class="button-container">
                     <button mat-raised-button matStepperNext color="accent" class="button-stepper"
-                            (click)="addRecipeInformation()">Weiter
+                            (click)="addRecipeInformation()" data-testid="add-recipe-button-step1-forward">Weiter
                     </button>
                 </div>
             </form>
@@ -85,17 +85,17 @@
                 <div class="add-ingredient-container">
                     <mat-form-field appearance="fill" class="ingredient">
                         <mat-label>Zutat</mat-label>
-                        <input matInput id="ingredient" type="text" formControlName="ingredient" required>
+                        <input matInput id="ingredient" type="text" formControlName="ingredient" required data-testid="add-recipe-input-ingredient">
                     </mat-form-field>
 
                     <mat-form-field appearance="fill" class="amount">
                         <mat-label>Menge</mat-label>
-                        <input matInput id="amount" type="number" formControlName="amount">
+                        <input matInput id="amount" type="number" formControlName="amount" data-testid="add-recipe-input-amount">
                     </mat-form-field>
 
                     <mat-form-field class="unit">
                         <mat-label>Einheit</mat-label>
-                        <select matNativeControl formControlName="unit">
+                        <select matNativeControl formControlName="unit" data-testid="add-recipe-input-unit">
                             <option value="g">g</option>
                             <option value="kg">kl</option>
                             <option value="ml">ml</option>
@@ -108,7 +108,7 @@
 
                     <div class="button-add-ingredient-container">
                         <button mat-mini-fab class="button-add-ingredient" color="accent"
-                                aria-label="Add ingredient" (click)="addIngredient()"> +
+                                aria-label="Add ingredient" (click)="addIngredient()" data-testid="add-recipe-button-ingredient"> +
                         </button>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                         (click)="enableLinearMode()">Zurück
                 </button>
                 <button mat-raised-button matStepperNext color="accent" class="button-stepper"
-                        disabled="{{button_ingredients_disabled}}">Weiter
+                        disabled="{{button_ingredients_disabled}}" data-testid="add-recipe-button-step2-forward">Weiter
                 </button>
             </div>
         </mat-step>
@@ -161,14 +161,14 @@
                     <mat-form-field appearance="fill" class="recipe-table-input">
                         <mat-label>Zubereitungsschritt</mat-label>
                         <textarea matInput id="step" type="text" formControlName="step" class="textarea-steps"
-                                  required></textarea>
+                                  required data-testid="add-recipe-input-step"></textarea>
                     </mat-form-field>
                 </div>
 
                 <div class="button-container">
                     <button mat-raised-button class="button-add-step" color="accent" aria-label="Add step"
                             (click)="addStep()"
-                            type="button">
+                            type="button" data-testid="add-recipe-button-step">
                         Schritt hinzufügen
                     </button>
                 </div>
@@ -177,12 +177,12 @@
                 <section class="listing-features">
                     <h2>Zubereitung:</h2>
                     <div class="recipe-steps" *ngFor="let step of recipe?.steps, index as i">
-                        <div class="step">
+                        <div class="step" data-testid="add-recipe-steplist">
                             {{step}}
                         </div>
 
                         <button mat-button class="button-delete-step" color="warn"
-                                aria-label="Delete step" (click)="removeStep(i)" type="button">
+                                aria-label="Delete step" (click)="removeStep(i)" type="button" data-testid="add-recipe-button-delete-step">
                             <mat-icon class="icon-2x">delete</mat-icon>
                         </button>
                     </div>
@@ -191,7 +191,7 @@
                 <div class="button-container">
                     <button mat-raised-button class="button-stepper" matStepperPrevious color="primary">Zurück</button>
                     <button mat-raised-button class="button-stepper" color="accent"
-                            type="submit" disabled="{{button_steps_disabled}}">
+                            type="submit" disabled="{{button_steps_disabled}}" data-testid="add-recipe-button-step3-forward">
                         Rezept Speichern
                     </button>
                 </div>

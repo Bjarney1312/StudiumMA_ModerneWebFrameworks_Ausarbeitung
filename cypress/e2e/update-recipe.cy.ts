@@ -1,4 +1,4 @@
-describe('Recipe-Details test', () => {
+describe('Update recipe test', () => {
 
     beforeEach(() => {
         cy.visit('/details/0');
@@ -28,6 +28,7 @@ describe('Recipe-Details test', () => {
         cy.get('[data-testid="update-recipe-button-ingredient"]').focus().click();
         cy.get('tr').should('have.length', 17);
         cy.get('[data-testid="update-recipe-button-step2-forward"]').focus().click();
+
         cy.get('[data-testid="update-recipe-steplist"]').should('have.length', 3);
         cy.get('[data-testid="update-recipe-input-step"]').focus().type('Test-Zubereitungsschritt');
         cy.get('[data-testid="update-recipe-button-step"]').focus().click();
