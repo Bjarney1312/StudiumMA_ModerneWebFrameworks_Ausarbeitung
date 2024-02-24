@@ -1,27 +1,28 @@
-# AusarbeitungKneissigModerneWebFrameworks
+# Ausarbeitung für das Modul Moderne Webframeworks im WS2023
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.
+Dieses Projekt wurde mit der [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0 generiert.
 
-## Development server
+chapter_installationsanleitung
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Zur Ausführung der Webanwendung muss zunächst Node.js auf dem System installiert werden. Der Downloadlink und die Installationsanleitung sind über [Node.js](https://nodejs.org) erreichbar.
+Um auf die Angular CLI zugreifen zu können, muss diese ebenfalls auf dem System installiert werden:
 
-## Code scaffolding
+```
+npm install -g @angular/cli
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Um die entsprechenden Abhängigkeiten für das Projekt zu installieren, muss über eine IDE oder die Kommandozeile in das Applikationsverzeichnis navigiert und der folgende Befehl abgesetzt werden: 
 
-## Build
+```
+npm install
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Nun kann die Anwendung ausgeführt werden. Dies kann über eine IDE oder mit Hilfe der Angular CLI über die Kommandozeile geschehen. Bei Verwendung der Angular CLI muss der Befehl 
 
-## Running unit tests
+```
+ng serve
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+in dem Verzeichnis abgesetzt werden, in dem sich die \verb#pckage.json#-Datei befindet. Dies ist i. d. R. das Wurzelverzeichnis der Applikation. 
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Nach dem Starten der Anwendung, ist diese lokal unter [http://localhost:4200/](http://localhost:4200/) erreichbar.
