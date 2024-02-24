@@ -23,6 +23,6 @@ Nun kann die Anwendung ausgeführt werden. Dies kann über eine IDE oder mit Hil
 ng serve
 ```
 
-in dem Verzeichnis abgesetzt werden, in dem sich die \verb#pckage.json#-Datei befindet. Dies ist i. d. R. das Wurzelverzeichnis der Applikation. 
+in dem Verzeichnis abgesetzt werden, in dem sich die _pckage.json_-Datei befindet. Dies ist i. d. R. das Wurzelverzeichnis der Applikation. 
 
 Nach dem Starten der Anwendung, ist diese lokal unter [http://localhost:4200/](http://localhost:4200/) erreichbar.
