@@ -61,8 +61,4 @@ describe('Recipe-Details test', () => {
     it('shows the steps of the test recipe', () => {
         cy.get('[data-testid="recipe-details-steps"]').should('have.length', 3);
     });
-
-    it('', () => {
-
-    });
 })

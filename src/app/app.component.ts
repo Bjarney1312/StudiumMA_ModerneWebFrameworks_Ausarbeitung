@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {HomeComponent} from './components/home/home.component';
 import {RouterModule} from '@angular/router';

@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -156,6 +156,7 @@ export class AddRecipeComponent implements OnInit {
             this.ingredientTable.renderRows();
             this.ingredients.reset();
             this.ingredients.value.ingredient = '';
+            this.recipe.created = new Date().toLocaleDateString();
 
             this.button_ingredients_disabled = false;
             this.isLinear = false;
@@ -197,7 +198,7 @@ export class AddRecipeComponent implements OnInit {
 
     /**
      * Entfernt einen Zubereitungsschritt aus der Liste mit Zubereitungsschritten des Rezepts.
-     * Der Nutzer kann den Butten zum Speichern des Rezepts nur klicken, wenn sich mindestens ein
+     * Der Nutzer kann den Button zum Speichern des Rezepts nur klicken, wenn sich mindestens ein
      * Zubereitungsschritt in der Liste befindet. Andernfalls wird der Button deaktiviert.
      * @param element Zubereitungsschritt, der entfernt werden soll
      */
